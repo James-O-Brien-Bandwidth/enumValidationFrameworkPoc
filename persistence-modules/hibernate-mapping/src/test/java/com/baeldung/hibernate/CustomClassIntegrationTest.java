@@ -54,7 +54,7 @@ public class CustomClassIntegrationTest {
         Did did2 = new Did("102", "444446", didGroup55);
         Did did3 = new Did("103", "444447", didGroup55);
         Did did4 = new Did("104", "444448", didGroup77);
-        TestClass testClass = new TestClass("Ads");
+        TestClass testClass = new TestClass("tierLevel 1");
         session.persist(testClass);
 //        session.persist(didGroup55);
 //        session.persist(didGroup77);
