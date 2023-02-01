@@ -4,7 +4,6 @@ import com.baeldung.hibernate.entities.Department;
 import com.baeldung.hibernate.entities.DeptEmployee;
 import com.baeldung.hibernate.entities.Did;
 import com.baeldung.hibernate.entities.DidGroup;
-import com.baeldung.hibernate.entities.TestClass;
 import com.baeldung.hibernate.pojo.DidGroupDtoWithPhoneNumbers;
 import com.baeldung.hibernate.pojo.Result;
 import org.hibernate.Session;
@@ -48,22 +47,20 @@ public class CustomClassIntegrationTest {
         transaction.commit();
 
         transaction = session.beginTransaction();
-        DidGroup didGroup55 = new DidGroup("tierLevel 1");
-        DidGroup didGroup77 = new DidGroup("tierLevel 2");
+        DidGroup didGroup55 = new DidGroup("1");
+        DidGroup didGroup77 = new DidGroup("2");
         Did did1 = new Did("101", "444445", didGroup55);
         Did did2 = new Did("102", "444446", didGroup55);
         Did did3 = new Did("103", "444447", didGroup55);
         Did did4 = new Did("104", "444448", didGroup77);
-        TestClass testClass = new TestClass("tierLevel 1");
-        session.persist(testClass);
-//        session.persist(didGroup55);
-//        session.persist(didGroup77);
-//        session.persist(did1);
-//        session.persist(did2);
-//        session.persist(did3);
-//        session.persist(did4);
+//        TestClass testClass = new TestClass("tierLevel 1");
+        session.persist(didGroup55);
+        session.persist(didGroup77);
+        session.persist(did1);
+        session.persist(did2);
+        session.persist(did3);
+        session.persist(did4);
         transaction.commit();
-
 
         transaction = session.beginTransaction();
     }
@@ -118,10 +115,12 @@ public class CustomClassIntegrationTest {
 
     @Test
     public void findAllE164WhereDidGroupIs4() {
-        Query<DidGroupDtoWithPhoneNumbers> query = session.createQuery("select new com.baeldung.hibernate.pojo.DidGroupDtoWithPhoneNumbers(m.didGroup.id, m.e164) from Did m where m.didGroup.id =1 ");
+        List queryWithAllResult = session.createQuery("select new com.baeldung.hibernate.pojo.DidGroupDtoWithPhoneNumbers(m.didGroup.id, m.e164) from Did m ").list();
+        Query<DidGroupDtoWithPhoneNumbers> query = session.createQuery("select new com.baeldung.hibernate.pojo.DidGroupDtoWithPhoneNumbers(m.didGroup.id, m.e164) from Did m where m.didGroup.id =6 ");
+        System.out.println(queryWithAllResult);
         List<DidGroupDtoWithPhoneNumbers> results = query.list();
         assertEquals(3, results.size());
-        assertEquals(1, results.get(0).getDidGroupId());
+        assertEquals(6, results.get(0).getDidGroupId());
 
         assertEquals("444445", results.get(0).getE164());
         assertEquals("444446", results.get(1).getE164());

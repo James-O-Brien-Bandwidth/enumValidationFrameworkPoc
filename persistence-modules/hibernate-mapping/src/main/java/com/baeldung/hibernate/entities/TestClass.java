@@ -8,12 +8,14 @@ import javax.persistence.AccessType;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+//TestClass = DidGroup
 @Entity
 public class TestClass extends BaseEntity<Integer> {
     @Id
@@ -30,11 +32,11 @@ public class TestClass extends BaseEntity<Integer> {
 
     private String name;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "didGroup")
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "testClass")
 //    private List<Did> dids;
 
-    @OneToMany(mappedBy = "department")
-    private List<DeptEmployee> employees;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+//    private List<DeptEmployee> employees;
 
     public TestClass(String name) {
         this.name = name;
@@ -118,13 +120,13 @@ public class TestClass extends BaseEntity<Integer> {
         this.name = name;
     }
 
-    public List<DeptEmployee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<DeptEmployee> employees) {
-        this.employees = employees;
-    }
+//    public List<DeptEmployee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(List<DeptEmployee> employees) {
+//        this.employees = employees;
+//    }
 
     public DidType getDidType() {
         return didType;
@@ -157,7 +159,6 @@ public class TestClass extends BaseEntity<Integer> {
 //    public void setDids(List<Did> dids) {
 //        this.dids = dids;
 //    }
-
 
     public Integer getLata() {
         return lata;

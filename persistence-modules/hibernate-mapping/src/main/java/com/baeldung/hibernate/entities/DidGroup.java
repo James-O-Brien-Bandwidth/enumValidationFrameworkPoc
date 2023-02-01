@@ -22,7 +22,7 @@ public class DidGroup extends BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.SEQUENCE //TODO - change back to auto after test
     )
     @Column(
             length = 11,
@@ -32,13 +32,13 @@ public class DidGroup extends BaseEntity<Integer> {
     @Access(AccessType.PROPERTY)
     private Integer id;
 
-    @Type(
-            parameters = {@Parameter(
-                    name = "enumClass",
-                    value = "com.bandwidth.numbers.inventory.intl.entities.enums.DidType"
-            )},
-            type = "com.voxbone.persistence.common.hibernate.type.GenericEnumUserType"
-    )
+//    @Type(
+//            parameters = {@Parameter(
+//                    name = "enumClass",
+//                    value = "com.bandwidth.numbers.inventory.intl.entities.enums.DidType"
+//            )},
+//            type = "com.voxbone.persistence.common.hibernate.type.GenericEnumUserType"
+//    )
     @Column(
             length = 11,
             name = "did_type"
@@ -46,13 +46,13 @@ public class DidGroup extends BaseEntity<Integer> {
     private DidType didType;
 
 
-    @Type(
-            parameters = {@Parameter(
-                    name = "enumClass",
-                    value = "com.bandwidth.numbers.inventory.intl.entities.enums.InfoTemplateType"
-            )},
-            type = "com.voxbone.persistence.common.hibernate.type.GenericEnumUserType"
-    )
+    //    @Type(
+//            parameters = {@Parameter(
+//                    name = "enumClass",
+//                    value = "com.bandwidth.numbers.inventory.intl.entities.enums.InfoTemplateType"
+//            )},
+//            type = "com.voxbone.persistence.common.hibernate.type.GenericEnumUserType"
+//    )
     @Column(
             name = "info_template_id"
     )
@@ -71,14 +71,14 @@ public class DidGroup extends BaseEntity<Integer> {
     private Integer minimumStock;
 
     @Basic
-    @Column(length = 1, name = "is_trunkable", nullable = false)
+//    @Column(length = 1, name = "is_trunkable", nullable = false)
     private Boolean trunkable;
 
     /**
      * If this Didgroup is hidden in the system
      */
     @Basic
-    @Column(insertable = false, length = 1, name = "hidden", nullable = false)
+//    @Column(insertable = false, length = 1, name = "hidden", nullable = false)
     private Boolean hidden;
 
     @Basic

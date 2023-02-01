@@ -2,13 +2,13 @@ package com.baeldung.hibernate.pojo;
 
 public class Result {
 
-    private long id;
+    private long didGroupId;
     private String employeeName;
 
     private String departmentName;
 
-    public Result(long id, String employeeName, String departmentName) {
-        this.id = id;
+    public Result(long didGroupId, String employeeName, String departmentName) {
+        this.didGroupId = didGroupId;
         this.employeeName = employeeName;
         this.departmentName = departmentName;
     }

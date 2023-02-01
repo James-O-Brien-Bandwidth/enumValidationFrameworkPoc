@@ -27,10 +27,10 @@ public class Did extends BaseEntity<Integer> {
     @ManyToOne(
             fetch = FetchType.EAGER
     )
-    @JoinColumn(
-            name = "didgroup_id",
-            nullable = false
-    )
+//    @JoinColumn(
+//            name = "didgroup_id",
+//            nullable = false
+//    )
     private DidGroup didGroup;
 
     private String did;

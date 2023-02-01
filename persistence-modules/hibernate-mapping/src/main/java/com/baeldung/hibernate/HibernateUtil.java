@@ -83,9 +83,9 @@ public class HibernateUtil {
         metadataSources.addAnnotatedClass(DeptEmployee.class);
         metadataSources.addAnnotatedClass(com.baeldung.hibernate.entities.Department.class);
         metadataSources.addAnnotatedClass(com.baeldung.hibernate.entities.Department.class);
-        metadataSources.addAnnotatedClass(TestClass.class);
-//        metadataSources.addAnnotatedClass(DidGroup.class);
-//        metadataSources.addAnnotatedClass(Did.class);
+//        metadataSources.addAnnotatedClass(TestClass.class);
+        metadataSources.addAnnotatedClass(DidGroup.class);
+        metadataSources.addAnnotatedClass(Did.class);
         metadataSources.addAnnotatedClass(Animal.class);
         metadataSources.addAnnotatedClass(Bag.class);
         metadataSources.addAnnotatedClass(Book.class);
