@@ -114,9 +114,10 @@ public class CustomClassIntegrationTest {
     }
 
     @Test
-    public void findAllE164WhereDidGroupIs4() {
+    public void findAllE164WhereDidGroupIs6() {
         List queryWithAllResult = session.createQuery("select new com.baeldung.hibernate.pojo.DidGroupDtoWithPhoneNumbers(m.didGroup.id, m.e164) from Did m ").list();
         Query<DidGroupDtoWithPhoneNumbers> query = session.createQuery("select new com.baeldung.hibernate.pojo.DidGroupDtoWithPhoneNumbers(m.didGroup.id, m.e164) from Did m where m.didGroup.id =6 ");
+
         System.out.println(queryWithAllResult);
         List<DidGroupDtoWithPhoneNumbers> results = query.list();
         assertEquals(3, results.size());
@@ -125,6 +126,13 @@ public class CustomClassIntegrationTest {
         assertEquals("444445", results.get(0).getE164());
         assertEquals("444446", results.get(1).getE164());
         assertEquals("444447", results.get(2).getE164());
+    }
+
+    @Test
+    public void findAllE164WhereDidGroupIs6_andAnotherCondition() {
+        //
+        //
+        //
     }
 
 

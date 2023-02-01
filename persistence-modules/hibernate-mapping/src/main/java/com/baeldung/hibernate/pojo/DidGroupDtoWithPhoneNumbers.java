@@ -17,8 +17,6 @@ public class DidGroupDtoWithPhoneNumbers {
 
     private Integer didGroupId;
     private String e164;
-
-
     private String countryCodeA3;
     private Integer stateId;
     private DidType didType;
