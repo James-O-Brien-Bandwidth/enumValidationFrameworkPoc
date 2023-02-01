@@ -2,9 +2,9 @@ package com.baeldung.hibernate.entities;
 
 import com.baeldung.hibernate.pojo.DidType;
 import com.baeldung.hibernate.pojo.InfoTemplateType;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.Type;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,17 +15,25 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class TestClass {
+public class TestClass extends BaseEntity<Integer> {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
+    @Column(
+            length = 11,
+            name = "didgroup_id",
+            nullable = false
+    )
+    @Access(AccessType.PROPERTY)
+    private Integer id;
 
     private String name;
 
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "didGroup")
 //    private List<Did> dids;
 
-    @OneToMany(mappedBy="department")
+    @OneToMany(mappedBy = "department")
     private List<DeptEmployee> employees;
 
     public TestClass(String name) {
@@ -33,7 +41,7 @@ public class TestClass {
     }
 
 
-//    @Type(
+    //    @Type(
 //            parameters = {@Parameter(
 //                    name = "enumClass",
 //                    value = "com.bandwidth.numbers.inventory.intl.entities.enums.DidType"
@@ -47,7 +55,7 @@ public class TestClass {
     private DidType didType;
 
 
-//    @Type(
+    //    @Type(
 //            parameters = {@Parameter(
 //                    name = "enumClass",
 //                    value = "com.bandwidth.numbers.inventory.intl.entities.enums.InfoTemplateType"
@@ -58,7 +66,7 @@ public class TestClass {
             name = "info_template_id"
     )
     private InfoTemplateType infoTemplate;
-//
+
     /**
      * Local access and transport area (LATA) represents a geographical area of the United States.
      * Is used for U.S. telecommunications regulation.
@@ -93,11 +101,12 @@ public class TestClass {
     )
     private String tierLevel;
 
-    public long getId() {
-        return id;
+    public Integer getId() {
+        return this.id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -117,4 +126,76 @@ public class TestClass {
         this.employees = employees;
     }
 
+    public DidType getDidType() {
+        return didType;
+    }
+
+    public void setDidType(DidType didType) {
+        this.didType = didType;
+    }
+
+    public InfoTemplateType getInfoTemplate() {
+        return infoTemplate;
+    }
+
+    public void setInfoTemplate(InfoTemplateType infoTemplate) {
+        this.infoTemplate = infoTemplate;
+    }
+
+    public String getTierLevel() {
+        return tierLevel;
+    }
+
+    public void setTierLevel(String tierLevel) {
+        this.tierLevel = tierLevel;
+    }
+
+//    public List<Did> getDids() {
+//        return dids;
+//    }
+//
+//    public void setDids(List<Did> dids) {
+//        this.dids = dids;
+//    }
+
+
+    public Integer getLata() {
+        return lata;
+    }
+
+    public void setLata(Integer lata) {
+        this.lata = lata;
+    }
+
+    public Integer getMinimumStock() {
+        return minimumStock;
+    }
+
+    public void setMinimumStock(Integer minimumStock) {
+        this.minimumStock = minimumStock;
+    }
+
+    public Boolean getTrunkable() {
+        return trunkable;
+    }
+
+    public void setTrunkable(Boolean trunkable) {
+        this.trunkable = trunkable;
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public String getRoutingCode() {
+        return routingCode;
+    }
+
+    public void setRoutingCode(String routingCode) {
+        this.routingCode = routingCode;
+    }
 }
