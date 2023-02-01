@@ -32,7 +32,7 @@ public class TestClass {
         this.name = name;
     }
 
-//
+
 //    @Type(
 //            parameters = {@Parameter(
 //                    name = "enumClass",
@@ -40,13 +40,13 @@ public class TestClass {
 //            )},
 //            type = "com.voxbone.persistence.common.hibernate.type.GenericEnumUserType"
 //    )
-//    @Column(
-//            length = 11,
-//            name = "did_type"
-//    )
-//    private DidType didType;
-//
-//
+    @Column(
+            length = 11,
+            name = "did_type"
+    )
+    private DidType didType;
+
+
 //    @Type(
 //            parameters = {@Parameter(
 //                    name = "enumClass",
@@ -54,10 +54,10 @@ public class TestClass {
 //            )},
 //            type = "com.voxbone.persistence.common.hibernate.type.GenericEnumUserType"
 //    )
-//    @Column(
-//            name = "info_template_id"
-//    )
-//    private InfoTemplateType infoTemplate;
+    @Column(
+            name = "info_template_id"
+    )
+    private InfoTemplateType infoTemplate;
 //
     /**
      * Local access and transport area (LATA) represents a geographical area of the United States.
@@ -87,11 +87,11 @@ public class TestClass {
 //    private String routingCode;
 //
 //    @Basic
-//    @Column(
-//            length = 6,
-//            name = "tier_level"
-//    )
-//    private String tierLevel;
+    @Column(
+            length = 6,
+            name = "tier_level"
+    )
+    private String tierLevel;
 //
     public long getId() {
         return id;
