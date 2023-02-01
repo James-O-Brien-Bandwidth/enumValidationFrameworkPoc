@@ -1,10 +1,18 @@
 package com.baeldung.hibernate.pojo;
 
 public class Result {
+
+    private long id;
     private String employeeName;
 
     private String departmentName;
-    
+
+    public Result(long id, String employeeName, String departmentName) {
+        this.id = id;
+        this.employeeName = employeeName;
+        this.departmentName = departmentName;
+    }
+
     public Result(String employeeName, String departmentName) {
         this.employeeName = employeeName;
         this.departmentName = departmentName;

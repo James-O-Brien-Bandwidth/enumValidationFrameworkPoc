@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.List;
 
 import com.baeldung.hibernate.entities.DeptEmployee;
+import com.baeldung.hibernate.entities.DidGroup;
+import com.baeldung.hibernate.pojo.DidGroupDtoWithPhoneNumbers;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -32,6 +34,21 @@ public class CustomClassIntegrationTest {
         session.persist(department);
         session.persist(employee);
         transaction.commit();
+
+        transaction = session.beginTransaction();
+        Department department2 = new Department("Accounts");
+        DeptEmployee employee2 = new DeptEmployee("John Smith", "002", department2);
+        session.persist(department2);
+        session.persist(employee2);
+        transaction.commit();
+
+        transaction = session.beginTransaction();
+        Department department3 = new Department("Ads");
+        DeptEmployee employee3 = new DeptEmployee("Bobby", "003", department3);
+        session.persist(department3);
+        session.persist(employee3);
+        transaction.commit();
+
         transaction = session.beginTransaction();
     }
     
@@ -55,14 +72,26 @@ public class CustomClassIntegrationTest {
     
     @Test
     public void whenResultConstructorInSelect_ThenListOfResultIsReturned() {
-        Query<Result> query = session.createQuery("select new com.baeldung.hibernate.pojo.Result(m.name, m.department.name) "
-                + "from DeptEmployee m");
+        Query<Result> query = session.createQuery("select new com.baeldung.hibernate.pojo.Result(m.name, m.department.name) from DeptEmployee m");
+        //select new com.baeldung.hibernate.pojo.Result(m.name, m.department.name) from DeptEmployee m
         List<Result> results = query.list();
         Result result = results.get(0);
         assertEquals("John Smith", result.getEmployeeName());
         assertEquals("Sales", result.getDepartmentName());
     }
-    
+
+    @Test
+    public void whenResultConstructorInSelect_ThenListOfResultIsReturned_originalWithSomeDiffs() {
+        Query<Result> query = session.createQuery("select new com.baeldung.hibernate.pojo.Result(m.department.id, m.name, m.department.name) from DeptEmployee m where m.name ='John Smith' ");
+        //select new com.baeldung.hibernate.pojo.Result(m.name, m.department.name) from DeptEmployee m
+        List<Result> results = query.list();
+        Result result = results.get(0);
+        assertEquals("John Smith", result.getEmployeeName());
+        assertEquals("Sales", result.getDepartmentName());
+    }
+
+
+
     @Test
     public void whenResultTransformerOnQuery_ThenListOfResultIsReturned() {
         Query query = session.createQuery("select m.name as employeeName, m.department.name as departmentName "
