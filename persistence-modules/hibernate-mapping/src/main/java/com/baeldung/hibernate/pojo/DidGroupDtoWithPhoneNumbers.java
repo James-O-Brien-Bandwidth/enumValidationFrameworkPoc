@@ -7,9 +7,6 @@ import java.util.List;
 
 public class DidGroupDtoWithPhoneNumbers {
 
-    //didGroupId
-    //e164
-
     public DidGroupDtoWithPhoneNumbers(Integer didGroupId, String e164) {
         this.didGroupId = didGroupId;
         this.e164 = e164;

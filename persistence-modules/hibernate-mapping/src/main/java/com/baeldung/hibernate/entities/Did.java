@@ -1,5 +1,8 @@
 package com.baeldung.hibernate.entities;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,20 +20,25 @@ public class Did extends BaseEntity<Integer> {
         this.didGroup = didGroup;
     }
 
-
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO
     )
+    @Column(
+            length = 11,
+            name = "dids_id",
+            nullable = false
+    )
+//    @Access(AccessType.PROPERTY)
     private Integer id;
 
     @ManyToOne(
             fetch = FetchType.EAGER
     )
-//    @JoinColumn(
-//            name = "didgroup_id",
-//            nullable = false
-//    )
+    @JoinColumn(
+            name = "didgroup_id",
+            nullable = false
+    )
     private DidGroup didGroup;
 
     private String did;
