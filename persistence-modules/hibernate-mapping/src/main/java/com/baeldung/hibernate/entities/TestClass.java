@@ -70,29 +70,29 @@ public class TestClass {
     @Basic
     @Column(length = 11, name = "minimum_stock")
     private Integer minimumStock;
-//
-//    @Basic
+
+    @Basic
 //    @Column(length = 1, name = "is_trunkable", nullable = false)
-//    private Boolean trunkable;
-//
-//    /**
-//     * If this Didgroup is hidden in the system
-//     */
-//    @Basic
+    private Boolean trunkable;
+
+    /**
+     * If this Didgroup is hidden in the system
+     */
+    @Basic
 //    @Column(insertable = false, length = 1, name = "hidden", nullable = false)
-//    private Boolean hidden;
-//
-//    @Basic
-//    @Column(name = "routing_code")
-//    private String routingCode;
-//
-//    @Basic
+    private Boolean hidden;
+
+    @Basic
+    @Column(name = "routing_code")
+    private String routingCode;
+
+    @Basic
     @Column(
             length = 6,
             name = "tier_level"
     )
     private String tierLevel;
-//
+
     public long getId() {
         return id;
     }
