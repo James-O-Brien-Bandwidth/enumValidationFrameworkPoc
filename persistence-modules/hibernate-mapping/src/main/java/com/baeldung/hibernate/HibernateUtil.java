@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
+import com.baeldung.hibernate.entities.Did;
+import com.baeldung.hibernate.entities.DidGroup;
+import com.baeldung.hibernate.entities.TestClass;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -29,20 +32,21 @@ import com.baeldung.hibernate.pojo.inheritance.Vehicle;
 
 public class HibernateUtil {
     private static String PROPERTY_FILE_NAME;
+
     private HibernateUtil() {
     }
 
     public static SessionFactory getSessionFactory() throws IOException {
         return getSessionFactory("");
     }
-    
+
     public static SessionFactory getSessionFactory(String propertyFileName) throws IOException {
-        if(propertyFileName.equals("")) propertyFileName = null;
+        if (propertyFileName.equals("")) propertyFileName = null;
         PROPERTY_FILE_NAME = propertyFileName;
         ServiceRegistry serviceRegistry = configureServiceRegistry();
         return makeSessionFactory(serviceRegistry);
     }
-    
+
     public static SessionFactory getSessionFactory(Strategy strategy) {
         return buildSessionFactory(strategy);
     }
@@ -71,12 +75,17 @@ public class HibernateUtil {
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
 
         metadataSources.addPackage("com.baeldung.hibernate.pojo");
+        metadataSources.addPackage("com.baeldung.hibernate.entities");
         metadataSources.addAnnotatedClass(Employee.class);
         metadataSources.addAnnotatedClass(Phone.class);
         metadataSources.addAnnotatedClass(EntityDescription.class);
         metadataSources.addAnnotatedClass(TemporalValues.class);
         metadataSources.addAnnotatedClass(DeptEmployee.class);
         metadataSources.addAnnotatedClass(com.baeldung.hibernate.entities.Department.class);
+        metadataSources.addAnnotatedClass(com.baeldung.hibernate.entities.Department.class);
+        metadataSources.addAnnotatedClass(TestClass.class);
+//        metadataSources.addAnnotatedClass(DidGroup.class);
+//        metadataSources.addAnnotatedClass(Did.class);
         metadataSources.addAnnotatedClass(Animal.class);
         metadataSources.addAnnotatedClass(Bag.class);
         metadataSources.addAnnotatedClass(Book.class);
@@ -86,10 +95,10 @@ public class HibernateUtil {
         metadataSources.addAnnotatedClass(Pen.class);
         metadataSources.addAnnotatedClass(Pet.class);
         metadataSources.addAnnotatedClass(Vehicle.class);
-        
+
 
         Metadata metadata = metadataSources.getMetadataBuilder()
-            .build();
+                .build();
 
         return metadata.getSessionFactoryBuilder()
                 .build();
