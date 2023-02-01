@@ -8,19 +8,14 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class DidGroup extends BaseEntity<Integer> {
@@ -99,6 +94,10 @@ public class DidGroup extends BaseEntity<Integer> {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "didGroup")
     private List<Did> dids;
+
+    public DidGroup(String tierLevel) {
+        this.tierLevel = tierLevel;
+    }
 
     @Override
     public Integer getId() {

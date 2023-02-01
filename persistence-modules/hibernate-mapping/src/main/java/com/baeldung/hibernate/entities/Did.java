@@ -11,6 +11,13 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Did extends BaseEntity<Integer> {
 
+    public Did(String did, String e164, DidGroup didGroup) {
+        this.did = did;
+        this.e164 = e164;
+        this.didGroup = didGroup;
+    }
+
+
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO
@@ -29,7 +36,6 @@ public class Did extends BaseEntity<Integer> {
     private String did;
 
     private String e164;
-
 
     @Override
     public Integer getId() {

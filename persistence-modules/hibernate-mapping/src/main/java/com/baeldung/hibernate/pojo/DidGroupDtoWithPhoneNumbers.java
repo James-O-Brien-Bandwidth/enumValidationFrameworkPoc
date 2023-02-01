@@ -7,9 +7,18 @@ import java.util.List;
 
 public class DidGroupDtoWithPhoneNumbers {
 
+    //didGroupId
+    //e164
 
+    public DidGroupDtoWithPhoneNumbers(Integer didGroupId, String e164) {
+        this.didGroupId = didGroupId;
+        this.e164 = e164;
+    }
 
     private Integer didGroupId;
+    private String e164;
+
+
     private String countryCodeA3;
     private Integer stateId;
     private DidType didType;
@@ -132,6 +141,15 @@ public class DidGroupDtoWithPhoneNumbers {
         phoneNumberDto.setPhoneNumber(stringNumber);
         phoneNumbers.add(phoneNumberDto);
         this.phoneNumbers = phoneNumbers;
+    }
+
+
+    public String getE164() {
+        return e164;
+    }
+
+    public void setE164(String e164) {
+        this.e164 = e164;
     }
 
 }
