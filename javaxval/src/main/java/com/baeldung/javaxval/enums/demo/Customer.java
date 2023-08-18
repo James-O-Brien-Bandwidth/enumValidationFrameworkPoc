@@ -49,29 +49,29 @@ public class Customer {
     public void setCustomerTypeMatchesPattern(CustomerType customerTypeMatchesPattern) {
         this.customerTypeMatchesPattern = customerTypeMatchesPattern;
     }
-
-    public static class Builder {
-        private String customerTypeString;
-        private CustomerType customerTypeOfSubset = CustomerType.NEW;
-        private CustomerType customerTypeMatchesPattern;
-
-        public Builder withCustomerTypeString(String customerTypeString) {
-            this.customerTypeString = customerTypeString;
-            return this;
-        }
-
-        public Builder withCustomerTypeOfSubset(CustomerType customerTypeOfSubset) {
-            this.customerTypeOfSubset = customerTypeOfSubset;
-            return this;
-        }
-
-        public Builder withCustomerTypeMatchesPattern(CustomerType customerTypeMatchesPattern) {
-            this.customerTypeMatchesPattern = customerTypeMatchesPattern;
-            return this;
-        }
-
-        public Customer build() {
-            return new Customer(customerTypeString, customerTypeOfSubset, customerTypeMatchesPattern);
-        }
-    }
+//
+//    public static class Builder {
+//        private String customerTypeString;
+//        private CustomerType customerTypeOfSubset = CustomerType.NEW;
+//        private CustomerType customerTypeMatchesPattern;
+//
+//        public Builder withCustomerTypeString(String customerTypeString) {
+//            this.customerTypeString = customerTypeString;
+//            return this;
+//        }
+//
+//        public Builder withCustomerTypeOfSubset(CustomerType customerTypeOfSubset) {
+//            this.customerTypeOfSubset = customerTypeOfSubset;
+//            return this;
+//        }
+//
+//        public Builder withCustomerTypeMatchesPattern(CustomerType customerTypeMatchesPattern) {
+//            this.customerTypeMatchesPattern = customerTypeMatchesPattern;
+//            return this;
+//        }
+//
+//        public Customer build() {
+//            return new Customer(customerTypeString, customerTypeOfSubset, customerTypeMatchesPattern);
+//        }
+//    }
 }

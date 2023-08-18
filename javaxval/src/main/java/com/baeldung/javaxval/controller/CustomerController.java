@@ -2,9 +2,10 @@ package com.baeldung.javaxval.controller;
 
 import com.baeldung.javaxval.InvalidCustomerEnumException;
 import com.baeldung.javaxval.enums.demo.Customer;
+import com.baeldung.javaxval.enums.demo.CustomerExperimental;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -17,15 +18,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
 @Validated
 public class CustomerController {
 
-    @PostMapping
-    public ResponseEntity<String> createCustomer(@Valid @RequestBody List<Customer> customer) {
+    @PostMapping()
+    public ResponseEntity<String> createCustomer(@Valid @RequestBody Customer customer) {
+
+        return null;
+    }
+
+    @PostMapping("/1")
+    public ResponseEntity<String> createCustomer1(@Valid @RequestBody List<CustomerExperimental> customer) {
 
         // Sample CURL to use for debugging:
       /*
@@ -41,7 +47,7 @@ public class CustomerController {
         System.out.println(
                 "In CustomerController.createPerson() and the details of the customer are: " + customer.toString());
 
-        return ResponseEntity.ok("Person created successfully");
+        return ResponseEntity.ok("Customer created successfully");
     }
 
     @ExceptionHandler(InvalidCustomerEnumException.class)
@@ -69,7 +75,7 @@ public class CustomerController {
         for (FieldError fieldError : fieldErrors) {
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
             errorResponse.setField(fieldError.getField());
-            errorResponse.setMessage(fieldError.getDefaultMessage());
+            errorResponse.setDefaultMessage(fieldError.getDefaultMessage());
             errorResponses.add(errorResponse);
         }
 

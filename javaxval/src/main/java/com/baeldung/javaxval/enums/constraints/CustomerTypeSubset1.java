@@ -8,36 +8,28 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-
-import com.baeldung.javaxval.enums.ValueOfEnumValidator;
+import com.baeldung.javaxval.enums.CustomerTypeSubSetValidator1;
 import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import com.baeldung.javaxval.enums.CustomerTypeSubSetValidator;
+import com.baeldung.javaxval.enums.demo.CustomerType;
+
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+//@Target({ElementType.FIELD})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = ValueOfEnumValidator.class)
-public @interface ValueOfEnum {
-    /**
-     * @return class containing enum values to which this String should match
-     */
+@Constraint(validatedBy = CustomerTypeSubSetValidator1.class)
+public @interface CustomerTypeSubset1 {
+
+    String message() default "Invalid enum value";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
     Class<? extends Enum<?>> enumClass();
 
-    /**
-     * @return the error message template
-     */
-    String message() default "must be any of enum {enumClass}";
-
-    /**
-     * @return the groups the constraint belongs to
-     */
-    Class<?>[] groups() default {};
-
-    /**
-     * @return the payload associated to the constraint
-     */
-    Class<? extends Payload>[] payload() default {};
 }

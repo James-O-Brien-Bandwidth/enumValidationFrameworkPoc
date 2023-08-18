@@ -2,9 +2,24 @@ package com.baeldung.javaxval.controller;
 
 public class ValidationErrorResponse {
 
-    public void setField(String field) {
+    private String field;
+
+    public String getField() {
+        return field;
     }
 
-    public void setMessage(String defaultMessage) {
+    public void setField(String field) {
+        this.field = field;
     }
+
+    public String getDefaultMessage() {
+        return defaultMessage;
+    }
+
+    public void setDefaultMessage(String defaultMessage) {
+        this.defaultMessage = defaultMessage;
+    }
+
+    private String defaultMessage;
+    
 }
