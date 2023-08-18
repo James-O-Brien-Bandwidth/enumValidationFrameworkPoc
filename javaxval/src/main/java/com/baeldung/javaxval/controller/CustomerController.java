@@ -15,9 +15,21 @@ import javax.validation.Valid;
 public class CustomerController {
 
     @PostMapping
-    public ResponseEntity<String> createPerson(@Valid @RequestBody Customer customer) {
+    public ResponseEntity<String> createCustomer(@Valid @RequestBody Customer customer) {
 
-        System.out.println("In CustomerController.createPerson() and the details of the customer are: " + customer.toString());
+        // Sample CURL to use for debugging:
+      /*
+        curl --location 'http://localhost:8097/api' \
+        --header 'Content-Type: application/json' \
+        --data '{
+        "customerTypeString": "test_c60cf82795eb",
+                "customerTypeOfSubset": "DEFAULT",
+                "customerTypeMatchesPattern": "DEFAULT"
+    }'
+    */
+
+        System.out.println(
+                "In CustomerController.createPerson() and the details of the customer are: " + customer.toString());
 
         return ResponseEntity.ok("Person created successfully");
     }
