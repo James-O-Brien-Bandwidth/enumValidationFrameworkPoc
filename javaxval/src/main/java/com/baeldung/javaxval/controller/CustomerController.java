@@ -1,8 +1,18 @@
 package com.baeldung.javaxval.controller;
 
+import com.baeldung.javaxval.InvalidCustomerEnumException;
 import com.baeldung.javaxval.enums.demo.Customer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +25,7 @@ import javax.validation.Valid;
 public class CustomerController {
 
     @PostMapping
-    public ResponseEntity<String> createCustomer(@Valid @RequestBody Customer customer) {
+    public ResponseEntity<String> createCustomer(@Valid @RequestBody List<Customer> customer) {
 
         // Sample CURL to use for debugging:
       /*
@@ -32,6 +42,50 @@ public class CustomerController {
                 "In CustomerController.createPerson() and the details of the customer are: " + customer.toString());
 
         return ResponseEntity.ok("Person created successfully");
+    }
+
+    @ExceptionHandler(InvalidCustomerEnumException.class)
+    public ResponseEntity<String> handleInvalidUserRoleException(InvalidCustomerEnumException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+//    @ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
+//    public ResponseEntity<List<String>> handleValidationException(
+//            org.springframework.web.bind.MethodArgumentNotValidException ex) {
+//        List<String> errors = ex.getBindingResult().getFieldErrors()
+//                .stream()
+//                .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+//                .collect(Collectors.toList());
+//
+//        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+//    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List<ValidationErrorResponse>> handleValidationException(MethodArgumentNotValidException ex) {
+        BindingResult bindingResult = ex.getBindingResult();
+        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+
+        List<ValidationErrorResponse> errorResponses = new ArrayList<>();
+        for (FieldError fieldError : fieldErrors) {
+            ValidationErrorResponse errorResponse = new ValidationErrorResponse();
+            errorResponse.setField(fieldError.getField());
+            errorResponse.setMessage(fieldError.getDefaultMessage());
+            errorResponses.add(errorResponse);
+        }
+
+        return new ResponseEntity<>(errorResponses, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<List<String>> handleValidationException(HttpMessageNotReadableException ex) {
+
+//        List<String> errors = ex.getBindingResult().getFieldErrors()
+//                .stream()
+//                .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+//                .collect(Collectors.toList());
+
+        return null;
+//        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
 }
