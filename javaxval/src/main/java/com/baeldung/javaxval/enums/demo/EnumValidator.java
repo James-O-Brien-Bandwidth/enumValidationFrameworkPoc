@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class ValueOfEnumValidator1 implements ConstraintValidator<EnumConstraint, CharSequence> {
+public class EnumValidator implements ConstraintValidator<EnumConstraint, CharSequence> {
 
     private List<String> acceptedValues;
 
@@ -25,6 +25,6 @@ public class ValueOfEnumValidator1 implements ConstraintValidator<EnumConstraint
     public boolean isValid(CharSequence value, ConstraintValidatorContext context) {
         // IN_SERVICE_BW and AVAILABLE only allowed
 
-        return !(value.equals(CustomerType.NEW.toString()) || value.equals(CustomerType.OLD.toString()));
+        return (value.equals(CustomerType.NEW.toString()) || value.equals(CustomerType.OLD.toString()));
     }
 }

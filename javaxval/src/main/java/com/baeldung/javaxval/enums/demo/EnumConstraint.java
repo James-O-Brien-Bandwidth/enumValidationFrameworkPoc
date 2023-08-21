@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = ValueOfEnumValidator1.class)
+@Constraint(validatedBy = EnumValidator.class)
 public @interface EnumConstraint {
     /**
      * @return class containing enum values to which this String should match
