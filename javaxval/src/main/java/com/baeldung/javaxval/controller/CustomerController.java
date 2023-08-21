@@ -3,6 +3,8 @@ package com.baeldung.javaxval.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class CustomerController {
 
-//    @InitBinder
-//    protected void initBinder(WebDataBinder binder) {
-//        binder.registerCustomEditor(CustomerType.class, new CustomerTypeEditor());
-//    }
-
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        System.out.println("Global binder initializer");
+        // Customize data binding and validation rules here
+        // For example, you can register custom property editors or validators
+    }
     /*
 
     Example of a CURL to use when an invalid ENUM valid is supplied:
