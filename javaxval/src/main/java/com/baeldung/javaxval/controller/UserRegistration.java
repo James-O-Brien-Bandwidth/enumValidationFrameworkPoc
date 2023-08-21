@@ -17,6 +17,9 @@ public class UserRegistration {
     @Min(value = 18, message = "Age must be at least 18")
     private int age;
 
+    @ValueOfEnum1(enumClass = CustomerType.class)
+    private String customerTypeString;
+
     public String getCustomerTypeString() {
         return customerTypeString;
     }
@@ -24,9 +27,6 @@ public class UserRegistration {
     public void setCustomerTypeString(String customerTypeString) {
         this.customerTypeString = customerTypeString;
     }
-
-    @ValueOfEnum1(enumClass = CustomerType.class)
-    private String customerTypeString;
 
     public String getUsername() {
         return username;

@@ -33,10 +33,13 @@ public class CustomerController {
      */
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody @Validated UserRegistration userRegistration, BindingResult bindingResult) {
+    public ResponseEntity<String> registerUser(@RequestBody @Validated UserRegistration userRegistration,
+            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // Handle validation errors
-            return ResponseEntity.badRequest().body("Invalid input: " + bindingResult.getFieldError().getDefaultMessage());
+            System.out.println("Error encountered: " + bindingResult.getFieldError().getDefaultMessage());
+            return ResponseEntity.badRequest()
+                    .body("Invalid input: " + bindingResult.getFieldError().getDefaultMessage());
         }
 
         // Your code to process user registration
