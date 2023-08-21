@@ -1,8 +1,14 @@
 package com.baeldung.javaxval.controller;
 
+import com.baeldung.javaxval.ValidationError;
+import java.util.List;
+
 public class ValidationErrorResponse {
 
     private String field;
+
+    public ValidationErrorResponse(List<ValidationError> errors) {
+    }
 
     public String getField() {
         return field;
@@ -21,5 +27,5 @@ public class ValidationErrorResponse {
     }
 
     private String defaultMessage;
-    
+
 }
