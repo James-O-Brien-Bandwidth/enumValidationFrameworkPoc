@@ -1,13 +1,12 @@
 package com.baeldung.javaxval.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.DataBinder;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,20 +25,23 @@ public class CustomerController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody @Valid UserRegistration userRegistrations,
+    public ResponseEntity<Map<String, Object>> registerUser(@RequestBody @Valid ValidList<UserRegistration> userRegistrations,
             BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            List<String> errors = bindingResult.getAllErrors()
-                    .stream()
-                    .map(error -> error.getDefaultMessage())
-                    .collect(Collectors.toList());
+        Map<String, Object> response = new HashMap<>();
 
-            System.out.println("Errors have appeared");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors.toString());
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = bindingResult.getFieldErrors()
+                    .stream()
+                    .collect(Collectors.toMap(
+                            error -> error.getField(),
+                            error -> error.getDefaultMessage()));
+
+            response.put("errors", errors);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-        return null;
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
 }
