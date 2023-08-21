@@ -16,7 +16,7 @@ import java.lang.annotation.*;
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = ValueOfEnumValidator1.class)
-public @interface ValueOfEnum1 {
+public @interface EnumConstraint {
     /**
      * @return class containing enum values to which this String should match
      */
@@ -25,7 +25,7 @@ public @interface ValueOfEnum1 {
     /**
      * @return the error message template
      */
-    String message() default "must be any of enum {enumClass}";
+    String message() default "Status must be either IN_SERVICE_BW or AVAILABLE from: {enumClass}";
 
     /**
      * @return the groups the constraint belongs to

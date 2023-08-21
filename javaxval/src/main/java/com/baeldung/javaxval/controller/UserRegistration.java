@@ -1,10 +1,11 @@
 package com.baeldung.javaxval.controller;
 
 import com.baeldung.javaxval.enums.demo.CustomerType;
-import com.baeldung.javaxval.enums.demo.ValueOfEnum1;
+import com.baeldung.javaxval.enums.demo.EnumConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class UserRegistration {
     @NotEmpty(message = "Username is required")
@@ -17,7 +18,8 @@ public class UserRegistration {
     @Min(value = 18, message = "Age must be at least 18")
     private int age;
 
-    @ValueOfEnum1(enumClass = CustomerType.class)
+    @NotNull
+    @EnumConstraint(enumClass = CustomerType.class)
     private String customerTypeString;
 
     public String getCustomerTypeString() {
