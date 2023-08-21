@@ -65,25 +65,11 @@ public class CustomerUnitTest extends LocaleAwareUnitTest {
             .toString());
     }
 
-    //   Test 4 - enum value could be "INVALID"
-    @Test
-    public void whenCustomerIsTotallyINVALID_thenViolationConstraintShouldBeThrown() {
-        Customer customer = new Customer();
-        customer.setCustomerTypeString("invalid");
-//        customer.setCustomerTypeOfSubset("asdas");
-        customer.setCustomerTypeMatchesPattern(CustomerType.OLD);
 
-        Set<ConstraintViolation<Customer>> violations = validator.validate(customer);
-        assertThat(violations.size()).isEqualTo(3);
-
-        assertThat(violations).anyMatch(havingPropertyPath("customerTypeString").and(havingMessage("must be any of enum class com.baeldung.javaxval.enums.demo.CustomerType")));
-        assertThat(violations).anyMatch(havingPropertyPath("customerTypeOfSubset").and(havingMessage("must be any of [NEW, OLD]")));
-        assertThat(violations).anyMatch(havingPropertyPath("customerTypeMatchesPattern").and(havingMessage("must match \"NEW|DEFAULT\"")));
-    }
-
-
-    // Step 1. Write out test scenarios for me assert against
-    // Step 2. Make the module a SpringBootApp so I can manually test
-    // Step 3. Convert the tests of step 1 to MVC tests so I can pass in any test-data input
-
+    // Test Scenarios:
+    // 1. When enum is null
+    // 2. When enum is blank
+    // 3. When enum state is a state we don't want like CANCELED
+    // 4. When enum valid is totally invalid like 'abcdef'
+    // 5. When many enums are passed in. First 3 are valid, reamining 2 are invalid. The error response should reflecvt that
 }

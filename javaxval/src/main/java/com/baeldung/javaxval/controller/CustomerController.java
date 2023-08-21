@@ -7,8 +7,6 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class CustomerController {
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        System.out.println("Global binder initializer");
-
-    }
-
     @PostMapping("/register")
-    public ResponseEntity<Map<String, Object>> registerUser(@RequestBody @Valid ValidList<UserRegistration> userRegistrations,
+    public ResponseEntity<Map<String, Object>> registerUser(
+            @RequestBody @Valid ValidList<UserRegistration> userRegistrations,
             BindingResult bindingResult) {
 
         Map<String, Object> response = new HashMap<>();
