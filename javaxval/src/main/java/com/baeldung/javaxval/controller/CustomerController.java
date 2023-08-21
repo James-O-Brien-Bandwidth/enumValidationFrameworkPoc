@@ -1,7 +1,12 @@
 package com.baeldung.javaxval.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -12,42 +17,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-@Validated
 public class CustomerController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         System.out.println("Global binder initializer");
-        // Customize data binding and validation rules here
-        // For example, you can register custom property editors or validators
+
     }
-    /*
-
-    Example of a CURL to use when an invalid ENUM valid is supplied:
-    curl --location 'http://localhost:8099/api/register' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "username": "test_53fbb027ef71",
-    "email": "jobrien@bandwidth.com",
-    "age": 30,
-    "customerTypeString": "asdasd"
-}'
-
-     */
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody @Validated UserRegistration userRegistration,
+    public ResponseEntity<String> registerUser(@RequestBody @Valid UserRegistration userRegistrations,
             BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
-            // Handle validation errors
-            System.out.println("Error encountered: " + bindingResult.getFieldError().getDefaultMessage());
-            return ResponseEntity.badRequest()
-                    .body("Invalid input: " + bindingResult.getFieldError().getDefaultMessage());
+            List<String> errors = bindingResult.getAllErrors()
+                    .stream()
+                    .map(error -> error.getDefaultMessage())
+                    .collect(Collectors.toList());
+
+            System.out.println("Errors have appeared");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors.toString());
         }
 
-        // Your code to process user registration
-
-        return ResponseEntity.ok("User registered successfully");
+        return null;
     }
 
 }
