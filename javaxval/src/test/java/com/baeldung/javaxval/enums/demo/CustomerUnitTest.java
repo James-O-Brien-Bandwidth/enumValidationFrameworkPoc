@@ -64,4 +64,12 @@ public class CustomerUnitTest extends LocaleAwareUnitTest {
         return l -> propertyPath.equals(l.getPropertyPath()
             .toString());
     }
+
+
+    // Test Scenarios:
+    // 1. When enum is null
+    // 2. When enum is blank
+    // 3. When enum state is a state we don't want like CANCELED
+    // 4. When enum valid is totally invalid like 'abcdef'
+    // 5. When many enums are passed in. First 3 are valid, reamining 2 are invalid. The error response should reflecvt that
 }
